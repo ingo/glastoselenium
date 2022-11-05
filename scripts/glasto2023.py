@@ -25,24 +25,37 @@ headless=False
 refreshrate = 0.0001
 
 # try one of these URLS
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1300000"
+# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/1300000"
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/addregistrations"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020/worthy-farm/1300001"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450012"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450013"
-DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1450000"
+# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023/worthy-farm/1300001"
+# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-ticket-coach-travel-deposits/worthy-farm/1450012"
+# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-ticket-coach-travel/worthy-farm/2500011"
+DEPOSIT_23_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/2500011"
 
-PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]
+PHRASES_TO_CHECK = [gl.Twenty23.REGISTRATION_PHRASE]
 
 # first is lead booker
+# Group 
 REG_DETAILS=[
     {
-        'number': "123456789", 
-        'postcode': "SW1 1SQ"
+        'number': "1343715140", 
+        'postcode': "NW6 4LD"
     },
     {
-        'number': "123456780", 
-        'postcode': "SW1 1SQ"
+        'number': "3046662564", 
+        'postcode': "B75 6RR"
+    },
+    {
+        'number': "3363253908", 
+        'postcode': "BA2 8TY"
+    },
+    {
+        'number': "2786673517", 
+        'postcode': "HA8 5SY"
+    },
+    {
+        'number': "3809560973", 
+        'postcode': "NW1 9EX"
     },
 ]
 
@@ -59,21 +72,21 @@ def attemptconnection(client, url):
         print("success")
         print(client.attempts)
         try:
-            gl.tofile(client.content, "reg_page_2020.html")
+            gl.tofile(client.content, "reg_page_2023.html")
         except:
             pass
         if client.submit_registration(REG_DETAILS):
             print("Registration details submission success!")
             # save the html data
             try:
-                gl.tofile(client.content, "reg_check_2020.html")
+                gl.tofile(client.content, "reg_check_2023.html")
             except:
                 pass
 
             try:
                 # then click 'confirm' button and save html data again
                 client.clickbutton('Confirm')
-                gl.tofile(client.pagesource, "payment_page_2020.html")
+                gl.tofile(client.pagesource, "payment_page_2023.html")
             except:
                 pass
 
@@ -93,10 +106,10 @@ def attemptconnection(client, url):
 
 # main
 s = gl.Service(gl.DRIVER_PATH)
-c = gl.Twenty20(s, timeout=4, refreshrate=refreshrate, verbose=False, 
+c = gl.Twenty23(s, timeout=4, refreshrate=refreshrate, verbose=False, 
     disablejs=disablejs, incognito=incognito, disableimages=disableimages, 
     cache=cache, headless=headless, proxy=proxy)
-attemptconnection(c, DEPOSIT_20_URL)
+attemptconnection(c, DEPOSIT_23_URL)
 
 # backup sleep 
 time.sleep(1000000) # Hack - leave it open to fill in details

@@ -27,6 +27,6 @@ def attemptconnection(client):
         
 # main
 s = gl.Service(DRIVER_PATH)
-c = gl.Twenty20(s, timeout=4, refreshrate=0.000001, verbose=False)
+c = gl.Twenty23(s, timeout=4, refreshrate=0.000001, verbose=False)
 attemptconnection(c)
 input('...')

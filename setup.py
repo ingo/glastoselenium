@@ -15,5 +15,5 @@ setup(name='glasto',
           'selenium'
       ],
       python_requires='>=3',
-      scripts=['scripts/glasto2019.py'],
+      scripts=['scripts/glasto2023.py'],
       zip_safe=False)
