@@ -112,4 +112,4 @@ c = gl.Twenty23(s, timeout=4, refreshrate=refreshrate, verbose=False,
 attemptconnection(c, DEPOSIT_23_URL)
 
 # backup sleep 
-time.sleep(1000000) # Hack - leave it open to fill in details
+time.sleep(1500000) # Hack - leave it open to fill in details
