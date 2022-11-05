@@ -32,10 +32,14 @@ refreshrate = 0.0001
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-ticket-coach-travel/worthy-farm/2500011"
 DEPOSIT_23_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/2500011"
 
-PHRASES_TO_CHECK = [gl.Twenty23.REGISTRATION_PHRASE]
+PHRASES_TO_CHECK = [
+    "enter the registration number",
+    "postcode for each person"
+    "registration details"
+]
 
 # first is lead booker
-# Group 
+# Group 6
 REG_DETAILS=[
     {
         'number': "1343715140", 
@@ -58,6 +62,34 @@ REG_DETAILS=[
         'postcode': "NW1 9EX"
     },
 ]
+
+# Group 3
+# REG_DETAILS=[
+#     {
+#         'number': "442257501", 
+#         'postcode': "SE22 9JU"
+#     },
+#     {
+#         'number': "3269539459", 
+#         'postcode': "SE22 0PU"
+#     },
+#     {
+#         'number': "1709972710", 
+#         'postcode': "CV5 8EN"
+#     },
+#     {
+#         'number': "2988532062", 
+#         'postcode': "SE15 4RB"
+#     },
+#     {
+#         'number': "3278389915", 
+#         'postcode': "CB4 1JQ"
+#     },
+#     {
+#         'number': "2547218061", 
+#         'postcode': "SK6 7GY"
+#     },
+# ]
 
 if len(REG_DETAILS) == 0:
     raise RuntimeError(
