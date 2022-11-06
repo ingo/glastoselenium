@@ -29,7 +29,7 @@ class Client(object):
             https://seleniumhq.github.io/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webdriver.html
     """
 
-    def __init__(self, service, timeout=2.0, verbose=False, 
+    def __init__(self, service, timeout=2.0, verbose=True, 
         disablejs=False, disableimages=True, disablecookies=False,
         incognito=False, cache=None, headless=False, proxy=None):
         self._service = service
@@ -41,6 +41,8 @@ class Client(object):
         self.verbose = verbose
 
         prefs = {}
+
+        self._service.options.add_argument('--disable-gpu')
     
         if disablejs:
             prefs['profile.managed_default_content_settings.javascript']= 2
@@ -73,11 +75,13 @@ class Client(object):
             self.client = webdriver.Remote(self._service.url(), options=self._service.options)
             self.client.set_page_load_timeout(self.timeout)
             try:
+                print(url)
                 self.client.get(url)
                 self.content = self.client.page_source
                 self._refreshcheck(url, phrases_to_check)
                 return True
-            except:
+            except Exception as e:
+                print(e)
                 self.timeout = max(self.timeout*scalefactor, mintimeout)
                 if self.verbose:
                     print("Page load Timeout Occured. Increasing timeout to {} and trying again....".format(

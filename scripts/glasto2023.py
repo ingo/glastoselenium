@@ -4,7 +4,7 @@ import time
 import glasto as gl
 
 # incognito??
-incognito = True
+incognito = False
 
 # disable js??
 disablejs = False
@@ -25,12 +25,7 @@ headless=False
 refreshrate = 0.0001
 
 # try one of these URLS
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/1300000"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/addregistrations"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023/worthy-farm/1300001"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-ticket-coach-travel-deposits/worthy-farm/1450012"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-ticket-coach-travel/worthy-farm/2500011"
-DEPOSIT_23_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/2500011"
+DEPOSIT_23_URL = "https://glastonbury.seetickets.com/event/glastonbury-2023-deposits/worthy-farm/2500000"
 
 PHRASES_TO_CHECK = [
     "enter the registration number",
@@ -39,57 +34,29 @@ PHRASES_TO_CHECK = [
 ]
 
 # first is lead booker
-# Group 6
+# Group 7
 REG_DETAILS=[
     {
-        'number': "1343715140", 
-        'postcode': "NW6 4LD"
+        'number': "123123123", 
+        'postcode': "A1 4AB"
     },
     {
-        'number': "3046662564", 
-        'postcode': "B75 6RR"
+        'number': "123123123", 
+        'postcode': "A1 4AB"
     },
     {
-        'number': "3363253908", 
-        'postcode': "BA2 8TY"
+        'number': "123123123", 
+        'postcode': "A1 4AB"
     },
     {
-        'number': "2786673517", 
-        'postcode': "HA8 5SY"
+        'number': "123123123", 
+        'postcode': "A1 4AB"
     },
     {
-        'number': "3809560973", 
-        'postcode': "NW1 9EX"
+        'number': "123123123", 
+        'postcode': "A1 4AB"
     },
 ]
-
-# Group 3
-# REG_DETAILS=[
-#     {
-#         'number': "442257501", 
-#         'postcode': "SE22 9JU"
-#     },
-#     {
-#         'number': "3269539459", 
-#         'postcode': "SE22 0PU"
-#     },
-#     {
-#         'number': "1709972710", 
-#         'postcode': "CV5 8EN"
-#     },
-#     {
-#         'number': "2988532062", 
-#         'postcode': "SE15 4RB"
-#     },
-#     {
-#         'number': "3278389915", 
-#         'postcode': "CB4 1JQ"
-#     },
-#     {
-#         'number': "2547218061", 
-#         'postcode': "SK6 7GY"
-#     },
-# ]
 
 if len(REG_DETAILS) == 0:
     raise RuntimeError(
@@ -137,6 +104,7 @@ def attemptconnection(client, url):
     # attemptconnection(client, url)
 
 # main
+print(DEPOSIT_23_URL)
 s = gl.Service(gl.DRIVER_PATH)
 c = gl.Twenty23(s, timeout=4, refreshrate=refreshrate, verbose=False, 
     disablejs=disablejs, incognito=incognito, disableimages=disableimages, 
@@ -144,4 +112,4 @@ c = gl.Twenty23(s, timeout=4, refreshrate=refreshrate, verbose=False,
 attemptconnection(c, DEPOSIT_23_URL)
 
 # backup sleep 
-time.sleep(1500000) # Hack - leave it open to fill in details
+time.sleep(4500000) # Hack - leave it open to fill in details
