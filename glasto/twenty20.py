@@ -3,6 +3,7 @@ import time
 from selenium.webdriver.common.keys import Keys
 
 from .client import RefresherClient
+from selenium.webdriver.common.by import By
 
 
 class Twenty20(RefresherClient):
@@ -20,8 +21,8 @@ class Twenty20(RefresherClient):
             return condition
 
         try:
-            self.content = self.client.find_element_by_tag_name('body')
-            # _ = self.client.find_element_by_tag_name('h1')
+            self.content = self.client.find_element(By.TAG_NAME,'body')
+            # _ = self.client.find_element(By.TAG_NAME, 'h1')
             # self.content = self.client.find_element_by_class_name(
             #     'entry-content')
         except:
@@ -42,7 +43,7 @@ class Twenty20(RefresherClient):
             # I think there may be a reason why I did not use this before
             self.client.refresh()
             try:
-                self.content = self.client.find_element_by_tag_name('body')
+                self.content = self.client.find_element(By.TAG_NAME, 'body')
                 # self.content = self.client \
                 #     .find_element_by_xpath("//*[contains(text(), '{}')]".format(REGISTRATION_PHRASE))
             except:
@@ -58,7 +59,7 @@ class Twenty20(RefresherClient):
         """
 
         submitted = False
-        inputs = self.client.find_elements_by_tag_name('input')
+        inputs = self.client.find_elements(By.TAG_NAME, 'input')
         
         # loop to find registration input
         reg_count = 0

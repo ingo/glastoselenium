@@ -2,6 +2,7 @@
 
 import sys
 import glasto as gl
+from selenium.webdriver.common.by import By
 
 URL = "https://glastonbury.seetickets.com/registration/lookup"
 PHRASES_TO_CHECK = []
@@ -13,7 +14,7 @@ if c.establishconnection(URL, phrases_to_check=PHRASES_TO_CHECK):
     print("success")
     print(c.attempts)
 
-inputs = c.client.find_elements_by_tag_name('input')
+inputs = c.client.find_elements(By.TAG_NAME, 'input')
 # loop to find email input
 found = False
 for i in inputs:

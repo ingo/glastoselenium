@@ -7,7 +7,9 @@ import glasto as gl
 URL = "file:///{}/ref/Buy%20tickets%20for%20Glastonbury%202019%20-%20Glastonbury.html".format(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 URL = "http://localhost:3000/"
+URL = "https://glastonbury.seetickets.com/content/extras"
 PHRASES_TO_CHECK = ["You are in"]#gl.Twenty20.REGISTRATION_PHRASE]
+PHRASES_TO_CHECK = ["REGISTRATION"]
 
 
 try:
