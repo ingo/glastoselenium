@@ -68,7 +68,8 @@ class Client(object):
             self._service.options.add_argument("--headless")
 
     def establishconnection(self, url, scalefactor=1.1,
-                            mintimeout=1.0, maxiterations=1000, phrases_to_check=[]):
+                            mintimeout=1.0, maxiterations=1000, phrases_to_check=[],
+                            holding_phrase='held on this page'):
         self.attempts = 0
         while self.attempts < maxiterations:
             self.client = webdriver.Remote(self._service.url(), options=self._service.options)
@@ -76,7 +77,7 @@ class Client(object):
             try:
                 self.client.get(url)
                 self.content = self.client.page_source
-                self._refreshcheck(url, phrases_to_check)
+                self._refreshcheck(url, phrases_to_check, holding_phrase)
                 return True
             except:
                 self.timeout = max(self.timeout*scalefactor, mintimeout)
