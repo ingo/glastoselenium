@@ -12,12 +12,14 @@ class Twenty20(RefresherClient):
     """
     REGISTRATION_PHRASE = "Please enter your registration details"
 
-    def _refreshcheck(self, url, phrases_to_check):
+    def _refreshcheck(self, url, phrases_to_check, holding_phrase):
         def isregistration(content):
             condition = False
             for p in phrases_to_check:
                 if p in content.get_attribute("innerHTML"):
                     condition = True
+            if holding_phrase in content.get_attribute('innerHTML'):
+                raise ConnectionRefusedError('Placed in holding page')
             return condition
 
         try:
