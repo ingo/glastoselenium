@@ -10,8 +10,8 @@ class Twenty20(RefresherClient):
     """
         2020 hack attempt
     """
-    REGISTRATION_PHRASE = "Please enter your registration details"
-
+    #REGISTRATION_PHRASE = "Please enter your registration details"
+    REGISTRATION_PHRASE = "REGISTRATION"
     def _refreshcheck(self, url, phrases_to_check):
         def isregistration(content):
             condition = False
@@ -50,8 +50,8 @@ class Twenty20(RefresherClient):
                 continue
 
         self.content = self.pagesource
-        # self.client.save_screenshot('./screenshots/registrationpage.png')
-        # print("Registration url: {}".format(self.client.current_url))
+        self.client.save_screenshot('./screenshots/registrationpage.png')
+        print("Registration url: {}".format(self.client.current_url))
     
     def submit_registration(self, details):
         """
