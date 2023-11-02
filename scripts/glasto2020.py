@@ -32,6 +32,7 @@ refreshrate = 0.0001
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450012"
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450013"
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1450000"
+
 DEPOSIT_20_URL = "https://glastonbury.seetickets.com/"
 
 #PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]

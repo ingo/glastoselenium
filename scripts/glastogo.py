@@ -5,8 +5,7 @@ import glasto as gl
 import time
 
 # test on reference HTML obtained from todays resale
-URL = "file:///{}/ref/Buy%20tickets%20for%20Glastonbury%202019%20-%20Glastonbury.html".format(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+URL = "https://glastonbury.seetickets.com"
 PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]
 
 # first is lead booker
@@ -69,7 +68,7 @@ def attemptconnection(client):
 # main
 s = gl.Service(gl.DRIVER_PATH)
 c = gl.Twenty20(s, timeout=4, refreshrate=0.000001, verbose=True, 
-    disablejs=True, incognito=True, disableimages=True, cache=4096, headless=False,
+    disablejs=False, incognito=True, disableimages=True, cache=4096, headless=False,
     proxy=None)
 attemptconnection(c)
 
