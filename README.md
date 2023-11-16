@@ -27,7 +27,7 @@ The end goal is to have a completely headless bot that can do everything automat
 
 Try:
 ```bash
-python scripts/glasto2023.py
+python scripts/glasto2024.py
 ```
 
 Requires a webdriver - only tested with chromedriver (http://chromedriver.chromium.org/)
