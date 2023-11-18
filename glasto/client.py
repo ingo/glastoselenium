@@ -3,6 +3,7 @@ from selenium import webdriver
 # use as a service to save start up and close down effort for many instances
 import selenium.webdriver.chrome.service as service
 import selenium.webdriver.chrome.options as options
+from selenium.webdriver.common.by import By
 
 
 class Service(object):
@@ -69,7 +70,8 @@ class Client(object):
             self._service.options.add_argument("--headless")
 
     def establishconnection(self, url, scalefactor=1.1,
-                            mintimeout=1.0, maxiterations=1000, phrases_to_check=[]):
+                            mintimeout=1.0, maxiterations=1000, phrases_to_check=[],
+                            holding_phrase='held on this page'):
         self.attempts = 0
         while self.attempts < maxiterations:
             self.client = webdriver.Remote(self._service.url(), options=self._service.options)
@@ -78,7 +80,7 @@ class Client(object):
                 print(url)
                 self.client.get(url)
                 self.content = self.client.page_source
-                self._refreshcheck(url, phrases_to_check)
+                self._refreshcheck(url, phrases_to_check, holding_phrase)
                 return True
             except Exception as e:
                 print(e)
@@ -94,7 +96,7 @@ class Client(object):
         pass
 
     def clickbutton(self, substr):
-        for button in self.client.find_elements_by_tag_name('button'):
+        for button in self.client.find_elements(By.TAG_NAME, 'button'):
             if substr in button.text.lower():
                 button.click()
                 self.content = self.client.page_source
@@ -118,7 +120,7 @@ class ScoutClient(Client):
         self.linkphrase = linkphrase
 
     def getalllinks(self):
-        elems = self.client.find_elements_by_xpath("//a[@href]")
+        elems = self.client.find_elements(By.XPATH, "//a[@href]")
         return list(set([elem.get_attribute("href") for elem in elems \
             if elem.get_attribute("href").startswith('http') and \
                 self.linkphrase in elem.get_attribute("href")]))

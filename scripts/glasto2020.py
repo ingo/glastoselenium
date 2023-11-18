@@ -30,9 +30,14 @@ refreshrate = 0.0001
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020/worthy-farm/1300001"
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450012"
 # DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450013"
-DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1450000"
+# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1450000"
 
-PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]
+DEPOSIT_20_URL = "https://glastonbury.seetickets.com/"
+
+#PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]
+PHRASES_TO_CHECK = ['Enter registration details']
+
+HOLDING_PHRASE = 'held at this page'
 
 # first is lead booker
 REG_DETAILS=[
@@ -55,7 +60,7 @@ if len(REG_DETAILS) > 6:
         "Cannot accept more than 1 + 5 registration details!")
 
 def attemptconnection(client, url):
-    if client.establishconnection(url, phrases_to_check=PHRASES_TO_CHECK):
+    if client.establishconnection(url, phrases_to_check=PHRASES_TO_CHECK, holding_phrase=HOLDING_PHRASE):
         print("success")
         print(client.attempts)
         try:

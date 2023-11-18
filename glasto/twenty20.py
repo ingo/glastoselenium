@@ -3,25 +3,30 @@ import time
 from selenium.webdriver.common.keys import Keys
 
 from .client import RefresherClient
+from selenium.webdriver.common.by import By
 
 
 class Twenty20(RefresherClient):
     """
         2020 hack attempt
     """
+
     REGISTRATION_PHRASE = "Please enter your registration details"
 
-    def _refreshcheck(self, url, phrases_to_check):
+    def _refreshcheck(self, url, phrases_to_check, holding_phrase):
+
         def isregistration(content):
             condition = False
             for p in phrases_to_check:
                 if p in content.get_attribute("innerHTML"):
                     condition = True
+            if holding_phrase in content.get_attribute('innerHTML'):
+                raise ConnectionRefusedError('Placed in holding page')
             return condition
 
         try:
-            self.content = self.client.find_element_by_tag_name('body')
-            # _ = self.client.find_element_by_tag_name('h1')
+            self.content = self.client.find_element(By.TAG_NAME,'body')
+            # _ = self.client.find_element(By.TAG_NAME, 'h1')
             # self.content = self.client.find_element_by_class_name(
             #     'entry-content')
         except:
@@ -42,15 +47,15 @@ class Twenty20(RefresherClient):
             # I think there may be a reason why I did not use this before
             self.client.refresh()
             try:
-                self.content = self.client.find_element_by_tag_name('body')
+                self.content = self.client.find_element(By.TAG_NAME, 'body')
                 # self.content = self.client \
                 #     .find_element_by_xpath("//*[contains(text(), '{}')]".format(REGISTRATION_PHRASE))
             except:
                 continue
 
         self.content = self.pagesource
-        # self.client.save_screenshot('./screenshots/registrationpage.png')
-        # print("Registration url: {}".format(self.client.current_url))
+        self.client.save_screenshot('./screenshots/registrationpage.png')
+        print("Registration url: {}".format(self.client.current_url))
     
     def submit_registration(self, details):
         """
@@ -58,7 +63,7 @@ class Twenty20(RefresherClient):
         """
 
         submitted = False
-        inputs = self.client.find_elements_by_tag_name('input')
+        inputs = self.client.find_elements(By.TAG_NAME, 'input')
         
         # loop to find registration input
         reg_count = 0

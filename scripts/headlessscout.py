@@ -5,7 +5,7 @@ import time
 import glasto as gl
 
 URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-deposits/worthy-farm/1450012"
-
+URL = "https://glastonbury.seetickets.com"
 s = gl.Service(gl.DRIVER_PATH)
 c = gl.ScoutClient(s, linkphrase="glastonbury", verbose=False, 
     disablejs=False, incognito=True, disableimages=True, 
