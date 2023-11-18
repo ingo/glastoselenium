@@ -4,7 +4,7 @@ import time
 import glasto as gl
 
 # incognito??
-incognito = True
+incognito = False
 
 # disable js??
 disablejs = False
@@ -22,27 +22,36 @@ proxy=None
 headless=False
 
 # refresh rate - seconds
-refreshrate = 0.0001
+refreshrate = 0.001
 
 # try one of these URLS
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1300000"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/addregistrations"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020/worthy-farm/1300001"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450012"
-# DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-ticket-coach-travel-deposits/worthy-farm/1450013"
-DEPOSIT_20_URL = "https://glastonbury.seetickets.com/event/glastonbury-2020-deposits/worthy-farm/1450000"
+DEPOSIT_24_URL = "https://glastonbury.seetickets.com/event/glastonbury-2024-deposits/worthy-farm/3500011"
+DEPOSIT_24_URL_THURS_COACH = "https://glastonbury.seetickets.com/event/glastonbury-2024-ticket-coach-travel/worthy-farm/3500012"
 
-PHRASES_TO_CHECK = [gl.Twenty20.REGISTRATION_PHRASE]
+PHRASES_TO_CHECK = [
+    "enter the registration number",
+    "postcode for each person"
+    "registration details"
+]
 
 # first is lead booker
+# Group 7
 REG_DETAILS=[
     {
-        'number': "123456789", 
-        'postcode': "SW1 1SQ"
+        'number': "1647737742", 
+        'postcode': "HA4 4LL"
     },
     {
-        'number': "123456780", 
-        'postcode': "SW1 1SQ"
+        'number': "1607427820", 
+        'postcode': "E12 6UF"
+    },
+    {
+        'number': "963607993", 
+        'postcode': "E12 6UF"
+    },
+    {
+        'number': "4256303496", 
+        'postcode': "E15 1BY"
     },
 ]
 
@@ -59,21 +68,21 @@ def attemptconnection(client, url):
         print("success")
         print(client.attempts)
         try:
-            gl.tofile(client.content, "reg_page_2020.html")
+            gl.tofile(client.content, "reg_page_2023.html")
         except:
             pass
         if client.submit_registration(REG_DETAILS):
             print("Registration details submission success!")
             # save the html data
             try:
-                gl.tofile(client.content, "reg_check_2020.html")
+                gl.tofile(client.content, "reg_check_2023.html")
             except:
                 pass
 
             try:
                 # then click 'confirm' button and save html data again
                 client.clickbutton('Confirm')
-                gl.tofile(client.pagesource, "payment_page_2020.html")
+                gl.tofile(client.pagesource, "payment_page_2023.html")
             except:
                 pass
 
@@ -92,11 +101,12 @@ def attemptconnection(client, url):
     # attemptconnection(client, url)
 
 # main
+print(DEPOSIT_24_URL)
 s = gl.Service(gl.DRIVER_PATH)
-c = gl.Twenty20(s, timeout=4, refreshrate=refreshrate, verbose=False, 
+c = gl.Twenty23(s, timeout=4, refreshrate=refreshrate, verbose=False, 
     disablejs=disablejs, incognito=incognito, disableimages=disableimages, 
     cache=cache, headless=headless, proxy=proxy)
-attemptconnection(c, DEPOSIT_20_URL)
+attemptconnection(c, DEPOSIT_24_URL)
 
 # backup sleep 
-time.sleep(1000000) # Hack - leave it open to fill in details
+time.sleep(4500000) # Hack - leave it open to fill in details

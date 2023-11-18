@@ -1,6 +1,7 @@
 from glasto.client import Service, Client, ScoutClient, RefresherClient
 from glasto.twenty19 import Twenty19, Twenty19WithKillSwitch
 from glasto.twenty20 import Twenty20
+from glasto.twenty23 import Twenty23
 from glasto.util import *
 
 from selenium.webdriver.common.keys import Keys as Keys
